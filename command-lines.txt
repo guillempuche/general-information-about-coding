@@ -1,0 +1,319 @@
+===================================
+===================================
+        GENERAL
+
+>cmd -new_console:a // as administrator
+>'TAB = autocomplete'
+>mv folder_original_name/ new_folder_name/
+>clear // stop and clean
+
+
+=============================
+==============================
+        NPM. General
+        https://www.npmjs.com/
+
+>npm init -f // autofill with default arguments
+>npm -v
+>npm -v <package_name>
+$ npm outdated // check the registry to see if any (or, specific)
+        // installed packages are currently outdated.
+>npm list <package_name> // local package version
+>npm list -g <package_name> // global package version
+>npm list --depth=0 // returns versions of all installed modules without dependencies
+>npm view <package> version // returns the latest available version on the package
+
+>npm install //shorter way: >npm i
+>npm install -g <package> // To download packages globally
+>npm uninstall -g <package> // To uninstall a global package
+>npm install // If you have a package.json file in your directory,
+              // npm will look at the dependencies
+              // that are listed in that file and download the latest versions
+>npm install <package_name> --save // or '-s'. Install in package.json->'dependencies'
+$ npm update [-g/--save] [<pkg>...] // It will update all the packages
+        // listed to the latest version (specified by the tag config)
+
+
+
+**** --save-dev
+save a package as a devDependency by specifying a --save-dev flag.
+devDependencies are packages used for development purposes, for
+example for running tests or transpiling code.
+> npm --save-dev  // shorter way: >-D
+
+****** ERRORS
+whenever running into mysterious npm issues, it's wise (if annoying)
+to simply blow away yournode_modules directory and then do
+>npm install
+to start with a fresh set of dependencies.
+
+
+***** extraneous ERR
+https://stackoverflow.com/questions/22620352/npm-windows-install-globally-results-in-npm-err-extraneous
+
+I solved it by combining all the answers. At first I installed
+the package globally.
+>npm install -g packagename --save
+
+Since npm installed this packaged as well globally but did not
+add it to my local package.json file, I had to do something about it.
+I choose, the solution to remove the local one and then install it globally.
+
+>npm uninstall packagename
+>npm install -g packagename
+This way I have no more warnings and do not mess up the package.json file.
+
+===========================
+********** NPM modules
+
+
+******** rimraf
+https://www.npmjs.com/package/rimraf
+
+>npm install rimraf
+>rm -rf // for for node
+
+**** @types/restify 
+https://www.npmjs.com/package/@types/restify
+Type definitions for restify = intellisense
+>npm install --save-dev @types/restify
+
+
+
+
+
+====================================
+====================================
+        GIT
+https://try.github.io/
+Book on a web: https://git-scm.com/book/en/v2/Getting-Started-About-Version-Control
+Info for VSCode https://code.visualstudio.com/docs/editor/versioncontrol
+                https://youtu.be/AKNYgP0yEOY
+Git default editor is VIM. Use Notepad with:
+        $ git <command_name>  --global core.editor "'C:/Program Files (x86)/Notepad++/notepad++.exe' -multiInst -notabbar -nosession -noPlugin"
+        // open git with Notepad, not with VIM
+
+$ git --version
+$ git init // new subdirectory named .git that contains
+        // all of your necessary repository files — a Git repository skeleton
+$ cat .gitignore // open and edit .gitignore
+>git status // check the commits, untracked...
+>git branch // should show all the local branches of your repo. The starred branch is your current branch.
+>git rev-parse --abbrev-ref HEAD // show current branch
+$ git ls-files // list of file in the directory
+
+
+
+********** CONFIG
+https://git-scm.com/book/en/v2/Getting-Started-First-Time-Git-Setup
+The first thing you should do when you install Git is to set your user name
+and email address. This is important because every Git commit uses this information,
+and it’s immutably baked into the commits you start creating:
+
+$ git config --global user.name "Guillem Puche" // or without global if you
+        // want override the global name
+$ git config --global user.email guillem7puche@gmail.com
+$ git config --list // list all settings Git can find
+
+
+********** LOG
+$ git --no-pager log -1 // To no show Unix filw. display the log content outside of less
+>git log // commit historial
+>git log -p -2 // '-p' or '--patch' shows the difference
+                // (the patch output) introduced in each commit.
+                // '-2' limit the number of log entries
+                // displayed and show only the last two entries.
+>git log --stat // See abbreviated stats for each commit.
+                // Prints below each commit entry a list
+                // of modified files, how many files were
+                // changed, and how many lines in those
+                // files were added and removed. It also
+                // puts a summary of the information at the end.
+>git log --pretty=oneline // changes the log output to
+                // formats other than the default. A few prebuilt
+                // options are available for you to use. The oneline
+                // option prints each commit on a single line,
+                // which is useful if you’re looking at a lot of commits.
+                // In addition, the short, full, and fuller options show
+                // the output in roughly the same format
+                // but with less or more information,
+>git log --pretty=oneline --abbrev-commit
+$ git log --oneline --decorate --graph --all // the history of your
+        // commits, showing where your branch pointers are and how
+        // your history has diverged 
+
+
+******** ADD
+>git add -A // stages All. It's equivalent to  'git add .' plus 'git add -u'
+>git add . // looks at the working tree and adds
+        // all those paths to the staged changes
+        // if they are either changed or are new
+        // and not ignored, it does not stage any 'rm' actions.
+>git add -u // looks at all the already tracked
+        // files and stages the changes to those
+        // files if they are different or if they
+        // have been removed. It does not add any
+        // new files, it only stages changes to already tracked files.
+>git rm --cached <file>... // to unstage file
+
+
+******* COMMIT
+TIP: if appear VIM editor, do this: press ESC -> write text ":qa!" -> press ENTER
+
+>git diff // what is different from our last commit
+>git diff HEAD // the diff of our most recent commit
+$ git reset HEAD <file_name> // Unstaging a staged file https://git-scm.com/book/en/v2/Git-Basics-Undoing-Things
+$ git checkout -- <file_name> // Unmodifying a modified file. It tells you pretty explicitly
+        // how to discard the changes you’ve made
+
+
+******* DELETE COMMIT
+        https://git-scm.com/book/en/v2/Git-Basics-Undoing-Things
+        https://www.clock.co.uk/insight/deleting-a-git-commit
+
+$ git commit --amend // when you commit too early and
+        // possibly forget to add some files, or you mess
+        // up your commit message. If you want to redo that
+        // commit, make the additional changes you forgot,
+        // stage them, and commit again.
+        // You want to change the
+        // actual content of your last commit,
+        // the process works basically the same
+        // way — first make the changes you think
+        // you forgot, stage those changes, and the
+        // subsequent git commit --amend replaces
+        // that last commit with your new, improved commit.
+        // When you amend a commit, you have the opportunity
+        // to change both the commit message and the content
+        // of the commit. If you amend the content of the commit
+        // substantially, you should almost certainly update
+        // the commit message to reflect that amended content.
+$ git commit --amend --no-edit // if your amendments are
+        // suitably trivial (fixing a silly typo or adding
+        // a file you forgot to stage) such that the earlier
+        // commit message is just fine, you can simply make
+        // the changes, stage them, and avoid the unnecessary editor session entirely
+$ git reset HEAD // It'll pop off the latest commit but leave all of your changes to the files intact.
+>git rebase --onto <branch name>~<first commit number to remove> <branch name>~<first commit to be kept> <branch name>
+        // the rebase tool to rebase a series of
+        // commits onto the HEAD they were originally
+        // based on instead of moving them to another one.
+        // With the interactive rebase tool, you can then
+        // stop after each commit you want to modify
+        // and change the message, add files, or do whatever you wish.
+ex:
+        Number	Hash	Commit Message	Author
+        1	2c6a45b	(HEAD) Adding public method to access protected method	Tom
+        2	ae45fab	Updates to database interface	Contractor 1
+        3	77b9b82	Improving database interface	Contractor 2
+        >git rebase --onto repair~3 repair~1 repair // remove commits 2 & 3 above
+>git rebase --abort
+>git rebase -i HEAD~
+
+
+******** REMOTE REPOSITORY
+        https://help.github.com/articles/adding-an-existing-project-to-github-using-the-command-line/
+        https://git-scm.com/book/en/v2/Git-Basics-Working-with-Remotes
+        https://help.github.com/articles/pushing-to-a-remote/
+
+
+$ git remote //  If you’ve cloned your repository, you should at least see 'origin',
+        // that is the default name Git gives to the server you cloned from.
+$ git remote rm origin // remove the original git
+$ git remote -v //show the URLs that Git has
+        // stored for the shortname to be used when reading and writing to that remote
+$ git remote add origin <remote repository URL>
+$ git remote add <shortname> <url> // add a new remote Git repository as a shortname
+        Ex:
+        // Now you can use the string pb on the command line in lieu of the
+        // whole URL. For example, if you want to fetch all the information
+        // that Paul has but that you don’t yet have in your repository,
+        // you can run git fetch pb:
+        $ git remote add pb https://github.com/paulboone/ticgit
+        $ git fetch pb
+        // Paul’s master branch is now accessible locally as pb/master —
+        // you can merge it into one of your branches, or you can check
+        // out a local branch at that point if you want to inspect it.
+$ git fetch // only downloads new data to your local repository — it doesn’t
+        // automatically merge it with any of your work or modify what you’re
+        // currently working on. You have to merge it manually into
+        // your work when you’re ready.
+$ git fetch <remote> // Get data from your remote projects. Fetches any 
+        // new work that has been pushed to that server since you
+        // cloned (or last fetched from) it.
+$ git pull // If your current branch is set up to track a remote branch
+        // you can use the it command to automatically fetch and then
+        // merge that remote branch into your current branch.
+        // Generally fetches data from the server you originally cloned
+        // from and automatically tries to merge it into the code you’re currently working on.
+$ git clone // After 'git pull', this command automatically sets up your
+        // local master branch to track the remote master branch (or whatever
+        // the default branch is called) on the server you cloned from.
+$ git push <remote> <branch> // push to your remotes
+$ git push origin master // If you want to push your master branch
+        // to your origin server (again, cloning generally sets up both
+        // of those names for you automatically), then you can run this
+        // to push any commits you’ve done back up to the server:
+$ git remote show <remote> // More information about a particular remote
+$ git remote show origin
+$ git remote rename .. // To change a remote’s shortname
+        Ex:
+        // pb/master is now at paul/master
+        $ git remote rename pb paul
+
+*********** branch
+Intro https://git-scm.com/book/en/v2/Git-Branching-Branches-in-a-Nutshell
+        https://git-scm.com/book/en/v2/Git-Branching-Basic-Branching-and-Merging
+        https://github.com/Kunena/Kunena-Forum/wiki/Create-a-new-branch-with-git-and-manage-branches
+'HEAD' is a pointer that points to your current local branch
+
+$ git branch // all branches
+$ git branch <branch_name> // create a new branch
+$ git log --oneline --decorate // shows you where the branch pointers are pointing
+$ git checkout <branch_name> // switch HEAD pointer to an existing branch
+$ git checkout -b <branch_name> // If not exist a branch = create & switch branch
+$ git merge <new_branch_to_merge> // merge branch to 'master' branch (HEAD points the master
+        // with 'checkout master') = deploye to production. This merged process and his files maybe isn't
+        // on another path branches.
+$ git branch -d <new_branch_to_merge> // delete locally branch merged
+$ git push origin :[name_of_your_new_branch] // delete the branch on github
+
+
+
+
+
+
+================================
+================================
+        Visual Studio code
+
+$ code --disable-extensions // execute VSCode with all extensions disabled
+
+
+
+
+================================
+================================
+        HEROKU
+Command lines https://devcenter.heroku.com/articles/heroku-cli-commands
+Guide to deploy to Heroku https://devcenter.heroku.com/articles/procfile#deploying-to-heroku
+Scaling https://devcenter.heroku.com/articles/scaling
+
+
+$ git push heroku master
+$ heroku apps // List of apps
+$ heroku open -a <app_name> // Open the app
+$ heroku logs // View an aggregated list of log messages from all dynos across all process types.
+$ heroku logs --tail
+$ heroku logs -a <app_name> // View logs of one app
+$ heroku ps -a <app_name> // Number of dynos that are executing in the app
+$ heroku ps:scale web=<number_dynos_u_want> // Whenever you freshly deploy your app in 
+        // heroku it starts up one dyno where the app runs. Just consider it as a
+        // server. This server cant handle large number of requests all at once.
+$ heroku ps -a <app_name> // Determining your Free dyno hours
+
+
+================================
+================================
+        VIM
+$ :q! // quit without save
