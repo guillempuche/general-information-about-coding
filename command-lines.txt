@@ -1,45 +1,89 @@
 ===================================
 ===================================
         GENERAL
-
->cmd -new_console:a // as administrator
->'TAB = autocomplete'
->mv folder_original_name/ new_folder_name/
->clear // stop and clean
+$ <fisk_name>:
+        // change from actual disk to another disk
+$ cd /
+        // Go to root directory.
+$ cd "F:\Chatbots\Code\test\swagger"
+        // go to a folder directory from any directory in the actual disk
+> cmd -new_console:a
+        // as administrator
+> <press TAB>
+        // autocomplete
+> mv folder_original_name/ new_folder_name/
+> clear
+        // stop and clean
+$ Rename-Item -Path .\ReduxSimpleStarter\ -NewName "ReduxWeather"
+$ Rename-Item -Path "HKLM:\Software\MyCompany\Advertising" -NewName "Marketing"
+        // Rename the directory (example 1: be on 1 level out of directory)
+$ mkdir <folder name>
+        // Create a new subfolder.
+$ dir
+        // (for Windows) Files and folders contained in the directory.
+$ dir <directory>
+        // (for Windows) Files and folders contained in the directory. Ex: $ dir build/static
+$ ls
+        // (for Linux) Files and folders contained in the directory.
+$ touch <file name>
+        // create a new file
 
 
 =============================
 ==============================
         NPM. General
         https://www.npmjs.com/
+        https://www.keithcirkel.co.uk/how-to-use-npm-as-a-build-tool/
 
->npm init -f // autofill with default arguments
->npm -v
->npm -v <package_name>
-$ npm outdated // check the registry to see if any (or, specific)
+$ npm init -f
+        // autofill with default arguments
+$ npm -v
+$ npm -v <package_name>
+$ npm outdated
+        // check the registry to see if any (or, specific)
         // installed packages are currently outdated.
->npm list <package_name> // local package version
->npm list -g <package_name> // global package version
->npm list --depth=0 // returns versions of all installed modules without dependencies
->npm view <package> version // returns the latest available version on the package
-
->npm install //shorter way: >npm i
->npm install -g <package> // To download packages globally
->npm uninstall -g <package> // To uninstall a global package
->npm install // If you have a package.json file in your directory,
-              // npm will look at the dependencies
-              // that are listed in that file and download the latest versions
->npm install <package_name> --save // or '-s'. Install in package.json->'dependencies'
-$ npm update [-g/--save] [<pkg>...] // It will update all the packages
+$ npm list <package_name>
+        // local package version
+$ npm list -g <package_name>
+        // global package version
+$ npm list --depth=0
+        // returns versions of all installed modules without dependencies
+$ npm view <package> version
+        // returns the latest available version on the package
+$ npm install
+        // If you have a package.json file in your directory,
+        // npm will look at the dependencies
+        // that are listed in that file and download the latest versions
+$ npm install -g <package>
+        // To download packages globally
+$ npm install --save <package name>
+        // Install in dependencies in package.json.
+$ npm i -S <package name>
+        // Install in dependencies in package.json.
+$ npm install <package name>@<version>
+        // Install a package version.
+$ npm install --save-dev
+        // save a package as a devDependency by specifying a --save-dev flag.
+        // devDependencies are packages used for development purposes, for
+$ npm i -D
+        // Equal to: $ npm install --save-dev
+$ npm i <package name>@latest
+        // Install latest version of the package
+$ npm uninstall -g <package>
+        // To uninstall a global package
+$ npm uninstall (Get-ChildItem).Name
+        // Uninstall all local package. IMPORTANT: For windows go to node_modules dir and run this in powershell
+        // ALERT: it can eliminate name of dependencies in package.json
+$ npm update [-g/--save] [<pkg>...]
+        // It will update all the packages
         // listed to the latest version (specified by the tag config)
+$ npm run
+        // list of the available command to run (from package.json)
+$ npm run test -- --coverage
+        // How much code (from the project) is being covered by your tests.
+$ npm cache clean --force
 
 
-
-**** --save-dev
-save a package as a devDependency by specifying a --save-dev flag.
-devDependencies are packages used for development purposes, for
-example for running tests or transpiling code.
-> npm --save-dev  // shorter way: >-D
 
 ****** ERRORS
 whenever running into mysterious npm issues, it's wise (if annoying)
@@ -70,8 +114,8 @@ This way I have no more warnings and do not mess up the package.json file.
 ******** rimraf
 https://www.npmjs.com/package/rimraf
 
->npm install rimraf
->rm -rf // for for node
+$ npm install rimraf
+$ rm -rf // for for node
 
 **** @types/restify 
 https://www.npmjs.com/package/@types/restify
@@ -91,16 +135,24 @@ Info for VSCode https://code.visualstudio.com/docs/editor/versioncontrol
                 https://youtu.be/AKNYgP0yEOY
 Git default editor is VIM. Use Notepad with:
         $ git <command_name>  --global core.editor "'C:/Program Files (x86)/Notepad++/notepad++.exe' -multiInst -notabbar -nosession -noPlugin"
-        // open git with Notepad, not with VIM
+                // open git with Notepad, not with VIM
 
 $ git --version
-$ git init // new subdirectory named .git that contains
+$ git clone <url>
+        // If you want to get a copy of an existing Git repository to the PC
+$ git init
+        // new subdirectory named .git that contains
         // all of your necessary repository files — a Git repository skeleton
-$ cat .gitignore // open and edit .gitignore
->git status // check the commits, untracked...
->git branch // should show all the local branches of your repo. The starred branch is your current branch.
->git rev-parse --abbrev-ref HEAD // show current branch
-$ git ls-files // list of file in the directory
+$ cat .gitignore
+        // open and edit .gitignore
+>git status
+        // check the commits, untracked...
+>git branch
+        // should show all the local branches of your repo. The starred branch is your current branch.
+>git rev-parse --abbrev-ref HEAD
+        // show current branch
+$ git ls-files
+        // list of file in the directory
 
 
 
@@ -110,60 +162,83 @@ The first thing you should do when you install Git is to set your user name
 and email address. This is important because every Git commit uses this information,
 and it’s immutably baked into the commits you start creating:
 
-$ git config --global user.name "Guillem Puche" // or without global if you
+$ git config --global user.name "your name"
+        // or without global if you
         // want override the global name
-$ git config --global user.email guillem7puche@gmail.com
-$ git config --list // list all settings Git can find
-
+$ git config --global user.email "your email"
+$ git config --list
+        // list all settings Git can find
+$ git status
+        // Show the working tree status
 
 ********** LOG
-$ git --no-pager log -1 // To no show Unix filw. display the log content outside of less
->git log // commit historial
->git log -p -2 // '-p' or '--patch' shows the difference
-                // (the patch output) introduced in each commit.
-                // '-2' limit the number of log entries
-                // displayed and show only the last two entries.
->git log --stat // See abbreviated stats for each commit.
-                // Prints below each commit entry a list
-                // of modified files, how many files were
-                // changed, and how many lines in those
-                // files were added and removed. It also
-                // puts a summary of the information at the end.
->git log --pretty=oneline // changes the log output to
-                // formats other than the default. A few prebuilt
-                // options are available for you to use. The oneline
-                // option prints each commit on a single line,
-                // which is useful if you’re looking at a lot of commits.
-                // In addition, the short, full, and fuller options show
-                // the output in roughly the same format
-                // but with less or more information,
->git log --pretty=oneline --abbrev-commit
-$ git log --oneline --decorate --graph --all // the history of your
+$ git --no-pager log -1
+        // To no show Unix filw. display the log content outside of less
+>git log
+        // commit historial
+>git log -p -2
+        // '-p' or '--patch' shows the difference
+        // (the patch output) introduced in each commit.
+        // '-2' limit the number of log entries
+        // displayed and show only the last two entries.
+>git log --stat 
+        // See abbreviated stats for each commit.
+        // Prints below each commit entry a list
+        // of modified files, how many files were
+        // changed, and how many lines in those
+        // files were added and removed. It also
+        // puts a summary of the information at the end.
+>git log --pretty=oneline
+        // changes the log output to
+        // formats other than the default. A few prebuilt
+        // options are available for you to use. The oneline
+        // option prints each commit on a single line,
+        // which is useful if you’re looking at a lot of commits.
+        // In addition, the short, full, and fuller options show
+        // the output in roughly the same format
+        // but with less or more information,
+$ git log --pretty=oneline --abbrev-commit
+$ git log --oneline --decorate --graph --all
+        // the history of your
         // commits, showing where your branch pointers are and how
         // your history has diverged 
 
 
 ******** ADD
->git add -A // stages All. It's equivalent to  'git add .' plus 'git add -u'
->git add . // looks at the working tree and adds
+>git add -A
+        // stages All. It's equivalent to  'git add .' plus 'git add -u'
+>git add .
+        // looks at the working tree and adds
         // all those paths to the staged changes
         // if they are either changed or are new
         // and not ignored, it does not stage any 'rm' actions.
->git add -u // looks at all the already tracked
+>git add -u
+        // looks at all the already tracked
         // files and stages the changes to those
         // files if they are different or if they
         // have been removed. It does not add any
         // new files, it only stages changes to already tracked files.
->git rm --cached <file>... // to unstage file
+> git rm --cached <file>...
+        // to unstage file
+$ git add path/to/file
+        // Track only the file.
+$ git add path/to/directoryOnly
+        // Track only the file inside the directory.
+$ git reset path/to/file
 
 
 ******* COMMIT
 TIP: if appear VIM editor, do this: press ESC -> write text ":qa!" -> press ENTER
 
->git diff // what is different from our last commit
->git diff HEAD // the diff of our most recent commit
-$ git reset HEAD <file_name> // Unstaging a staged file https://git-scm.com/book/en/v2/Git-Basics-Undoing-Things
-$ git checkout -- <file_name> // Unmodifying a modified file. It tells you pretty explicitly
+$ git commit -m "description of the commitment"
+$ git diff
+        // what is different from our last commit
+$ git diff HEAD
+        // the diff of our most recent commit
+$ git reset HEAD <file_name>
+        // Unstaging a staged file https://git-scm.com/book/en/v2/Git-Basics-Undoing-Things
+$ git checkout -- <file_name>
+        // Unmodifying a modified file. It tells you pretty explicitly
         // how to discard the changes you’ve made
 
 
@@ -171,7 +246,8 @@ $ git checkout -- <file_name> // Unmodifying a modified file. It tells you prett
         https://git-scm.com/book/en/v2/Git-Basics-Undoing-Things
         https://www.clock.co.uk/insight/deleting-a-git-commit
 
-$ git commit --amend // when you commit too early and
+$ git commit --amend
+        // when you commit too early and
         // possibly forget to add some files, or you mess
         // up your commit message. If you want to redo that
         // commit, make the additional changes you forgot,
@@ -188,13 +264,15 @@ $ git commit --amend // when you commit too early and
         // of the commit. If you amend the content of the commit
         // substantially, you should almost certainly update
         // the commit message to reflect that amended content.
-$ git commit --amend --no-edit // if your amendments are
-        // suitably trivial (fixing a silly typo or adding
+$ git commit --amend --no-edit
+        // if your amendments are
+        // suitably trivial (fixing a silly typo o45r adding
         // a file you forgot to stage) such that the earlier
         // commit message is just fine, you can simply make
         // the changes, stage them, and avoid the unnecessary editor session entirely
-$ git reset HEAD // It'll pop off the latest commit but leave all of your changes to the files intact.
->git rebase --onto <branch name>~<first commit number to remove> <branch name>~<first commit to be kept> <branch name>
+$ git reset HEAD
+        // It'll pop off the latest commit but leave all of your changes to the files intact.
+> git rebase --onto <branch name>~<first commit number to remove> <branch name>~<first commit to be kept> <branch name>
         // the rebase tool to rebase a series of
         // commits onto the HEAD they were originally
         // based on instead of moving them to another one.
@@ -217,49 +295,68 @@ ex:
         https://help.github.com/articles/pushing-to-a-remote/
 
 
-$ git remote //  If you’ve cloned your repository, you should at least see 'origin',
+$ git remote
+        // If you’ve cloned your repository, you should at least see 'origin',
         // that is the default name Git gives to the server you cloned from.
-$ git remote rm origin // remove the original git
-$ git remote -v //show the URLs that Git has
+$ git remote rm origin
+        // remove the original git
+$ git remote -v
+        // Show the URLs that Git has
         // stored for the shortname to be used when reading and writing to that remote
-$ git remote add origin <remote repository URL>
-$ git remote add <shortname> <url> // add a new remote Git repository as a shortname
-        Ex:
-        // Now you can use the string pb on the command line in lieu of the
-        // whole URL. For example, if you want to fetch all the information
-        // that Paul has but that you don’t yet have in your repository,
-        // you can run git fetch pb:
-        $ git remote add pb https://github.com/paulboone/ticgit
-        $ git fetch pb
-        // Paul’s master branch is now accessible locally as pb/master —
-        // you can merge it into one of your branches, or you can check
-        // out a local branch at that point if you want to inspect it.
-$ git fetch // only downloads new data to your local repository — it doesn’t
+1- $ git remote add origin <remote repository URL, ie: github.com/.../.git>
+        // Connect your local project folder to your empty folder/repository on Github.
+2- $ git push -u origin master
+$ git remote add <shortname> <url>
+        // add a new remote Git repository as a shortname
+                Ex:
+                // Now you can use the string pb on the command line in lieu of the
+                // whole URL. For example, if you want to fetch all the information
+                // that Paul has but that you don’t yet have in your repository,
+                // you can run git fetch pb:
+                $ git remote add pb https://github.com/paulboone/ticgit
+                $ git fetch pb
+                // Paul’s master branch is now accessible locally as pb/master —
+                // you can merge it into one of your branches, or you can check
+                // out a local branch at that point if you want to inspect it.
+$ git fetch
+        // only downloads new data to your local repository — it doesn’t
         // automatically merge it with any of your work or modify what you’re
         // currently working on. You have to merge it manually into
         // your work when you’re ready.
-$ git fetch <remote> // Get data from your remote projects. Fetches any 
+$ git fetch <remote>
+        // Get data from your remote projects. Fetches any 
         // new work that has been pushed to that server since you
         // cloned (or last fetched from) it.
-$ git pull // If your current branch is set up to track a remote branch
+$ git pull
+        // If your current branch is set up to track a remote branch
         // you can use the it command to automatically fetch and then
         // merge that remote branch into your current branch.
         // Generally fetches data from the server you originally cloned
         // from and automatically tries to merge it into the code you’re currently working on.
-$ git clone // After 'git pull', this command automatically sets up your
+$ git pull origin <branch_name>
+        // If you haven't made any changes locally, updating a local
+        // repository with changes from a Github repository
+$ git pull --rebase origin <branch_name>
+        // If you have made changes, and you want to avoid adding a new merge commit
+$ git clone
+        // After 'git pull', this command automatically sets up your
         // local master branch to track the remote master branch (or whatever
         // the default branch is called) on the server you cloned from.
-$ git push <remote> <branch> // push to your remotes
-$ git push origin master // If you want to push your master branch
+$ git push <remote> <branch>
+        // push to your remotes
+$ git push origin master
+        // If you want to push your master branch
         // to your origin server (again, cloning generally sets up both
         // of those names for you automatically), then you can run this
         // to push any commits you’ve done back up to the server:
-$ git remote show <remote> // More information about a particular remote
+$ git remote show <remote>
+        // More information about a particular remote
 $ git remote show origin
-$ git remote rename .. // To change a remote’s shortname
-        Ex:
-        // pb/master is now at paul/master
-        $ git remote rename pb paul
+$ git remote rename ..
+        // To change a remote’s shortname
+                Ex:
+                // pb/master is now at paul/master
+                $ git remote rename pb paul
 
 *********** branch
 Intro https://git-scm.com/book/en/v2/Git-Branching-Branches-in-a-Nutshell
@@ -267,53 +364,288 @@ Intro https://git-scm.com/book/en/v2/Git-Branching-Branches-in-a-Nutshell
         https://github.com/Kunena/Kunena-Forum/wiki/Create-a-new-branch-with-git-and-manage-branches
 'HEAD' is a pointer that points to your current local branch
 
-$ git branch // all branches
-$ git branch <branch_name> // create a new branch
-$ git log --oneline --decorate // shows you where the branch pointers are pointing
-$ git checkout <branch_name> // switch HEAD pointer to an existing branch
-$ git checkout -b <branch_name> // If not exist a branch = create & switch branch
-$ git merge <new_branch_to_merge> // merge branch to 'master' branch (HEAD points the master
+$ git branch
+        // all branches
+$ git branch <branch_name>
+        // create a new branch
+$ git log --oneline --decorate
+        // shows you where the branch pointers are pointing
+$ git checkout <branch_name>
+        // switch HEAD pointer to an existing branch
+$ git checkout -b <branch_name>
+        // If not exist a branch = create & switch branch
+$ git merge <new_branch_to_merge>
+        // merge branch to 'master' branch (HEAD points the master
         // with 'checkout master') = deploye to production. This merged process and his files maybe isn't
         // on another path branches.
-$ git branch -d <new_branch_to_merge> // delete locally branch merged
-$ git push origin :[name_of_your_new_branch] // delete the branch on github
+$ git branch -d <new_branch_to_merge>
+        // delete locally branch merged
+$ git push origin :[name_of_your_new_branch]
+        // delete the branch on github
 
 
 
 
 
 
-================================
-================================
-        Visual Studio code
+================================================================
+================================================================
+        Visual Studio Code (VSCode)
 
 $ code --disable-extensions // execute VSCode with all extensions disabled
+Keyboard Shortcut: Ctrl+Shift+P
+
+*********** KEYSHORTCUTS
+https://code.visualstudio.com/docs/getstarted/keybindings#_default-keyboard-shortcuts
+
+- Create cursors on all occurrences of a string - select one instance of a string e.g. background-color and press Ctrl+Shift+L. Now you can replace all instances by simply typing.
+- Use of snippets select your snippet from the suggestion list and press Tab to create the code. If more than one parameter exists then press Tab to jump to it.
+- Rename a symbol such as a function name or variable name. Hit F2 while in the symbol Book to rename all instances - this will occur across all files in a project. You can also see refactoring in the right-click context menu.
+- Formatting can be applied to the current selection with Ctrl+K Ctrl+F. The entire document with Shift+Alt+F
+- DEBUG: A column breakpoint can be set using Shift+F9 or through the context menu during a debug session and column breakpoints are shown inline in the editor.
+
+LINE ACTIONS:
+- Ctrl+X	Cut line (empty selection)
+- Ctrl+Shift+K/Shift+Delete 	Delete Line
+- Ctrl+Shift+K	Comment code /* */ (code selected)
+- Ctrl+Shift+\	Jump to matching bracket
+- Ctrl+/	(selected text) Add Line Comment
+- Ctrl+K Ctrl+C	Add Line Comment
+- Ctrl+K Ctrl+U	Remove Line Comment
+- Shift+F12	Show References
+- Ctrl+.	Quick Fix
+- Ctrl+Space	Invoke IntelliSense
+- Shift+Alt+DownArrow / Shift+Alt+UpArrow       Copy a line and insert it above / below the current position respectively
+- Alt+UpArrow and Alt+DownArrow         Move an entire line or selection of lines up or down respectively.
+- Ctrl+D        (selected text) Select the next same word
+- Ctrl+Insert   Copy actual line
+- Ctrl+Delete   Delete word from actual character
+
+DISPLAY
+- Ctrl+B	Show/Hide side bar
+- Ctrl+Shift+E	Show Explorer / Toggle Focus
+- Ctrl+Shift+D	Show Debug
+- Ctrl++Shift+D+1	(personalized) Debug: select debug option and start debugging
+- Ctrl+Shift+D+2	(personalized) Debug: attach to Node process
+- Ctrl+`	Toggle Integrated Terminal
+- Ctrl+,        User Settings
+- Ctrl+\        Split the editor
+- Ctrl+=        Zoom in
+- Ctrl+-        Zoom out
+- Ctrl+Shift+Tab        Cycle you through the last set of files opened
+- Ctrl+Tab      Show you a list of all opened editors from the history independent from the active editor group.
+
+DEBUG
+- F9	Toggle BreakpoinT
+- F5	Start
+- F5	Continue
+- Shift+F5	Stop
 
 
 
-
-================================
-================================
+================================================================
+================================================================
         HEROKU
 Command lines https://devcenter.heroku.com/articles/heroku-cli-commands
 Guide to deploy to Heroku https://devcenter.heroku.com/articles/procfile#deploying-to-heroku
 Scaling https://devcenter.heroku.com/articles/scaling
 
-
+$ heroku login
+$ heroku apps
+        // List of apps
 $ git push heroku master
-$ heroku apps // List of apps
-$ heroku open -a <app_name> // Open the app
-$ heroku logs // View an aggregated list of log messages from all dynos across all process types.
+$ git remote add heroku <git_url>
+        // Remote repository to our current repository that we have in the machine
+        // and name the repository as 'heroku'
+$ heroku open
+        // Open the app (we need to be in the app git directory)
+$ heroku open -a <app_name>
+        // Open the app
+$ heroku logs
+        // View an aggregated list of log messages from all dynos across all process types.
 $ heroku logs --tail
-$ heroku logs -a <app_name> // View logs of one app
-$ heroku ps -a <app_name> // Number of dynos that are executing in the app
-$ heroku ps:scale web=<number_dynos_u_want> // Whenever you freshly deploy your app in 
+$ heroku logs -a <app_name>
+        // View logs of one app
+$ heroku ps -a <app_name>
+        // Number of dynos that are executing in the app
+$ heroku ps:scale web=<number_dynos_u_want>
+        // Whenever you freshly deploy your app in 
         // heroku it starts up one dyno where the app runs. Just consider it as a
         // server. This server cant handle large number of requests all at once.
-$ heroku ps -a <app_name> // Determining your Free dyno hours
+$ heroku ps -a <app_name>
+        // Determining your Free dyno hours
 
 
-================================
-================================
+
+
+
+
+
+================================================================
+================================================================
         VIM
-$ :q! // quit without save
+$ :qa! // quit without save
+
+
+
+
+
+================================================================
+================================================================
+        Windows
+
+taskkill /im node.exe /F
+        Taskkill is a built-in windows command that, well, kills a task. http://www.wisdomofjim.com/blog/how-kill-running-nodejs-processes-in-windows
+
+
+
+
+
+
+
+================================================================
+================================================================
+        DOCKER
+Docker runs a VM running Linux.
+
+$ Ctrl + C/D or 'exit'
+        // Cancel process
+$ docker build .
+        // Build the container using a set of file and folders that belong to your project.
+        // '.': build it in the current directory.
+$ docker build -t <dockerID>/<repo name>:<version> .
+        // Tagging image, then you can use container's name instead of ID
+        // ex: $ docker run <custom image name>
+        // version (optional): 'latest' (by default)
+$ docker build -f <file name> .
+        // Build the image from a specific Docker file.
+        // Ex: $ docker build -f Dockerfile.dev .
+$ docker run
+        // = 'docker create' (create an image) + 'docker start' (executing the startup command, start an image)
+        // ex:
+        //      $ docker create <image name>
+        //      $ docker start -a <container id>
+$ docker run -a
+        // -a: watch for output from the container and print it out to the terminal
+$ docker run <image name or id> <command>
+        // command: default command override.
+        // Ex: $ docker run 46b6a7fc6f25 npm run test
+$ docker run <dockerID>/<repo name>:<version>
+        // ex: $ docker run guillempuche/redis:latest
+        // equal to: $ docker run guillempuche/redis
+$ docker run -it <image name or id> <command>
+        // -it or '-i -t': provide input to the container. '-t' formats the input (ex: autocomplete...)
+        // Ex: $ docker run -it 46b6a7fc6f25 npm run test
+$ docker run -it sh
+        // Full terminal access inside the container. 'sh' = shell = command processor, ex: bash, powershell, zsh & sh.
+$ docker run -p <port on local host>:<container's port> <image id>
+        // 'docker run' + Port mapping
+        // '<port A>:<port B>':
+        //      Port A: route incoming requests to this port.
+        //      Port B: port inside the container.
+$ docker run -d <image name>
+        // Startup a new container and execute in the background so we can run commands in the terminal.
+$ docker run -p 3000:3000 -v <bookmark of node modules> -v ${pwd}:/app <image id>
+        // WARNING: this doesn't work on some OS. It's better use docker-compose.
+        // Anytime the container tries to access something in the app directory, it's going to reach
+        // back out of the container to the pwd (present working directory) on your local machine, and don't overwrite acces to node modules that you already installed into the container.
+        // Bookmark of node modules ex: $ /app/node_modules
+        // Map pwd into '/app' folder. $(__) is a shortcut.
+        // ':/' is to map inside the folder.
+$ docker ps
+        // list of containers running on your machine
+$ docker ps --all
+        // list of containers that you have run.
+$ docker start -a <container id>
+        // If container is closed, this can restart the container. We can't replace the default command.
+        // -a: watch for output from the container and print it out to the terminal
+$ docker system prune
+        // delete all containers from the computer.
+$ docker logs <container id>
+        // logs: retrieve all information that has been emitted previously.
+$ docker stop <container id>
+        // It sends a SIGTERM (terminate signal) to stop the primary process inside the container + shut the container. If the process doesn't stop after 10 sec, Docker automatically 'kill' = shut down the process.
+        // It doesn't remove the container.
+$ docker stop $(docker ps -aq)
+        // Stop  all running containers.
+$ docker kill <container id>
+        // it sends a SIGKILL (kill signal) to kill the primary process inside the container + any additional work to do for user
+$ docker rm
+        // Removes containers. After running this command for a container, the container does not exist anymore.
+$ docker exec -it <container id> <command>
+        // execute additional command in a container
+        // -it or '-i -t': provide input to the container. '-t' formats the input (ex: autocomplete...)
+        // Ex: $ docker exec -it 328a02812b9f npm run test
+$ docker exec -it <container id> sh
+        // Full terminal access inside the container. 'sh' = shell = command processor, ex: bash, powershell, zsh & sh.
+        // Ex: run the test container. Use 'stdin' (standard in) of the primary process inside the test container.
+        // Then what you type into the terminal will be sent to 'stdin' on that process.
+$ docker attach <image id>
+        // Attach to the primary process, not the second processes.
+
+
+
+*********** DOCKER COMPOSE
+Seperate CLI installed along with Docker. Used to start up multiple Docker containers
+at the same time.
+
+$ docker-compose up
+        // equal to $ docker run <image>
+$ docker-compose up --build
+        // Run this command instead of 'docker... up' if you add new services.
+        // equal to:
+        // $ docker build . 
+        // $ docker run <image>
+$ docker-compose up -d
+        // Launch in background
+$ docker-compose down
+        // stop and remove the containers
+$ docker-compose ps
+        // List of containers from information in docker-compose file.
+
+
+
+
+================================================================
+================================================================
+        NODE
+
+
+$ taskkill /im node.exe /F
+        // Kill all process. Use it if there is this error:
+        // $ Error: listen EADDRINUSE
+        // '/im': flag stands for "imagename" and it lets you pass
+        // in the image name of the process to be terminated which is node.exe
+        // '/F' (optional): it forces termination of every Node process.
+
+
+
+
+================================================================
+================================================================
+        Serverless
+AWS CLI https://serverless.com/framework/docs/providers/aws/cli-reference/
+
+$ serverless create
+        // To bootstrap a Serverless project.
+$ serverless create --template <predefined template> --path <service folder name>
+$ serverless deploy
+        // To deploy the current state of the project.
+$ serverless invoke
+        // Or manually invoke to test the live function.
+$ serverless logs
+        // To stream your function’s logs.
+$ serverless deploy -v
+        // Deploy to the cloud provider.
+        // '-v' flog: show logs on the terminal informing you of the status of each step in the deployment process
+$ serverless invoke -f <function's name> -l
+        // '-f' === function. '-l' === logging data
+$ serveless remove
+        //  if command fails, you will need to remove something manually (ex: the
+        // S3 deployment bucket).
+
+
+
+
+        PLUGIN SERVERLESS OFFLINE
+$ serverless offline start --host api.localhost
