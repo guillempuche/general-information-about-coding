@@ -366,6 +366,8 @@ Intro https://git-scm.com/book/en/v2/Git-Branching-Branches-in-a-Nutshell
 
 $ git branch
         // all branches
+$ git branch -r
+        // All remote-tracking branches
 $ git branch <branch_name>
         // create a new branch
 $ git log --oneline --decorate
