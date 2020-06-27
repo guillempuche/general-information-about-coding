@@ -377,11 +377,24 @@ $ git checkout <branch_name>
 $ git checkout -b <branch_name>
         // If not exist a branch = create & switch branch
 $ git checkout -b <local branch> <remote branch>
-        // Eg: $ git checkout -b "translations" "origin/translations"
+        // Eg:
+        // $ git fetch origin
+        // $ git checkout -b "translations" "origin/translations"
 $ git merge <new_branch_to_merge>
         // merge branch to 'master' branch (HEAD points the master
         // with 'checkout master') = deploye to production. This merged process and his files maybe isn't
         // on another path branches.
+$ git merge --no-ff <branch you want to merge with the branch you're currently poinitng>
+        // More on [](https://stackoverflow.com/questions/9069061/what-is-the-difference-between-git-merge-and-git-merge-no-ff)
+        // Explicit Merge: Creates a new merge commit. It uses "--no-ff", it
+        // allows someone reviewing history to clearly see the branch you checked
+        // out to work on. A process that unifies the work done in two branches. 
+        // Fast Forward Merge: Forward rapidly, without creating a new commit. It
+        // will just shift the master HEAD.
+        // Rebase: Establish a new base level Squash. It's a way to replay
+        // commits, one by one on top of a branch.
+        // Crush or squeeze (something) with force so that it becomes flat. It
+        // will compact feature commits into one before merging
 $ git branch -D <new_branch_to_merge>
         // delete locally branch merged
 $ git push origin :[name_of_your_new_branch]
