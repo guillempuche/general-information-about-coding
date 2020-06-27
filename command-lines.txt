@@ -376,11 +376,13 @@ $ git checkout <branch_name>
         // switch HEAD pointer to an existing branch
 $ git checkout -b <branch_name>
         // If not exist a branch = create & switch branch
+$ git checkout -b <local branch> <remote branch>
+        // Eg: $ git checkout -b "translations" "origin/translations"
 $ git merge <new_branch_to_merge>
         // merge branch to 'master' branch (HEAD points the master
         // with 'checkout master') = deploye to production. This merged process and his files maybe isn't
         // on another path branches.
-$ git branch -d <new_branch_to_merge>
+$ git branch -D <new_branch_to_merge>
         // delete locally branch merged
 $ git push origin :[name_of_your_new_branch]
         // delete the branch on github
