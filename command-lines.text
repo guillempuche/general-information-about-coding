@@ -326,14 +326,13 @@ $ git fetch
 $ git fetch <remote>
         // Get data from your remote projects. Fetches any 
         // new work that has been pushed to that server since you
-        // cloned (or last fetched from) it.
-$ git pull
+        // cloned (or last fetched from) it.        
+$ git pull origin <branch_name>
         // If your current branch is set up to track a remote branch
         // you can use the it command to automatically fetch and then
         // merge that remote branch into your current branch.
         // Generally fetches data from the server you originally cloned
         // from and automatically tries to merge it into the code you’re currently working on.
-$ git pull origin <branch_name>
         // If you haven't made any changes locally, updating a local
         // repository with changes from a Github repository
 $ git pull --rebase origin <branch_name>
