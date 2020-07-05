@@ -301,8 +301,8 @@ $ git remote
 $ git remote rm origin
         // remove the original git
 $ git remote -v
-        // Show the URLs that Git has
-        // stored for the shortname to be used when reading and writing to that remote
+        // Show the URLs that Git has stored for the shortname
+        // to be used when reading and writing to that remote
 1- $ git remote add origin <remote repository URL, ie: github.com/.../.git>
         // Connect your local project folder to your empty folder/repository on Github.
 2- $ git push -u origin master
@@ -318,6 +318,11 @@ $ git remote add <shortname> <url>
                 // Paul’s master branch is now accessible locally as pb/master —
                 // you can merge it into one of your branches, or you can check
                 // out a local branch at that point if you want to inspect it.
+$ git remote set-url <remote_name> <remote_url>
+        // Changing a git remote's URL. To change the URL of the origin
+        // to git@gitserver.com:user/repo_name.git you would type:
+        // $ git remote set-url origin git@gitserver.com:user/repo_name.git
+git remote set-url origin git@gitserver.com:user/repo_name.git
 $ git fetch
         // only downloads new data to your local repository — it doesn’t
         // automatically merge it with any of your work or modify what you’re
