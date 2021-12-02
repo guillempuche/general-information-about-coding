@@ -379,6 +379,8 @@ $ git log --oneline --decorate
 $ git checkout <branch_name>
         // switch HEAD pointer to an existing branch
 $ git checkout -b <branch_name>
+        // For git versions <2.23 https://stackoverflow.com/a/2569513/9192954
+        // Replace for >=2.23 with `git switch -c <new-branch>`
         // If not exist a branch = create & switch branch
 $ git checkout -b <local branch> <remote branch>
         // Eg:
