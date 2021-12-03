@@ -412,7 +412,7 @@ $ git branch -D <new_branch_to_merge>
 $ git push origin :[name_of_your_new_branch]
         // delete the branch on github
 Steps to merge new code from master to your branch
-  $ git checkout main
+  $ git checkout master
   $ git pull
   $ git checkout feature/abc
   $ git pull
