@@ -417,7 +417,7 @@ Steps to merge new code from master to your branch
   $ git checkout feature/abc
   $ git pull
   $ git merge master
-  $ git push
+  $ git push $$ or $$ git push -u origin feature/nullsafety // for push new branches on the remote repo.
 
 
 
