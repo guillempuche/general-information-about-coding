@@ -386,9 +386,15 @@ $ git checkout -b <local branch> <remote branch>
         // Eg:
         // $ git fetch origin
         // $ git checkout -b "translations" "origin/translations"
+$ git branch -a
+        // To list all branches in local and remote repositories
+$ git branch -r
+        // To list only the remote branches
+$ git show-branch
+        // To list the branches and their commits
 $ git merge <new_branch_to_merge>
         // merge branch to 'master' branch (HEAD points the master
-        // with 'checkout master') = deploye to production. This merged process and his files maybe isn't
+        // with 'checkout master'). This merged process and his files maybe isn't
         // on another path branches.
 $ git merge --no-ff <branch you want to merge with the branch you're currently poinitng>
         // More on [](https://stackoverflow.com/questions/9069061/what-is-the-difference-between-git-merge-and-git-merge-no-ff)
@@ -405,7 +411,13 @@ $ git branch -D <new_branch_to_merge>
         // delete locally branch merged
 $ git push origin :[name_of_your_new_branch]
         // delete the branch on github
-
+Steps to merge new code from master to your branch
+  $ git checkout main
+  $ git pull
+  $ git checkout feature/abc
+  $ git pull
+  $ git merge master
+  $ git push
 
 
 
