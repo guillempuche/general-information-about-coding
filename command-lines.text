@@ -374,6 +374,12 @@ $ git branch -r
         // All remote-tracking branches
 $ git branch <branch_name>
         // create a new branch
+$ git tag
+        // List of all tags
+$ git show <tag_name>
+        // Show info of a tag
+$ git tag -l "v2.0*"
+        // Search for tags with some specific characters
 $ git log --oneline --decorate
         // shows you where the branch pointers are pointing
 $ git checkout <branch_name>
