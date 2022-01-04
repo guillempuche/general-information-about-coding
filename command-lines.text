@@ -437,8 +437,8 @@ $ dir /AL /S C:\ | find "SYMLINK"    [cmd]
         // (symlinks and directory junctions).
         // "/S" makes the command recursive.
         // Replace C:\ with the drive letter you want to scan, or with a path if you don't want to scan an entire drive
-$ ln -s dart-sdk_2.10 dart-sdk   [Mac]
-$ ln -sfn dart-sdk_2.10 dart-sdk   [Mac]
+$ ln -s flutter_sdk_2.8.1 flutter  [Mac]
+$ ln -sfn flutter_sdk_2.8.1 flutter   [Mac]
         // Overwrite the old symlink for the new one.
 $ mklink /D dart-sdk_2.10 dart-sdk    [cmd]
         // This allows me to easily switch between different Dart versions.
