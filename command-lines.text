@@ -227,7 +227,7 @@ $ git add path/to/directoryOnly
 $ git reset path/to/file
 
 
-******* COMMIT
+******* COMMITS
 TIP: if appear VIM editor, do this: press ESC -> write text ":qa!" -> press ENTER
 
 $ git commit -m "description of the commitment"
@@ -237,15 +237,14 @@ $ git diff HEAD
         // the diff of our most recent commit
 $ git reset HEAD <file_name>
         // Unstaging a staged file https://git-scm.com/book/en/v2/Git-Basics-Undoing-Things
-$ git checkout -- <file_name>
-        // Unmodifying a modified file. It tells you pretty explicitly
-        // how to discard the changes you’ve made
 
 
-******* DELETE COMMIT
+DELETE/UNDO COMMITS
         https://git-scm.com/book/en/v2/Git-Basics-Undoing-Things
         https://www.clock.co.uk/insight/deleting-a-git-commit
 
+$ git checkout <commit_SHA_hash> -- <file_name>
+        // Revert specific file changes to a specific old commit.
 $ git commit --amend
         // when you commit too early and
         // possibly forget to add some files, or you mess
@@ -272,22 +271,21 @@ $ git commit --amend --no-edit
         // the changes, stage them, and avoid the unnecessary editor session entirely
 $ git reset HEAD
         // It'll pop off the latest commit but leave all of your changes to the files intact.
-> git rebase --onto <branch name>~<first commit number to remove> <branch name>~<first commit to be kept> <branch name>
+$ git rebase --onto <branch name>~<first commit number to remove> <branch name>~<first commit to be kept> <branch name>
         // the rebase tool to rebase a series of
         // commits onto the HEAD they were originally
         // based on instead of moving them to another one.
         // With the interactive rebase tool, you can then
         // stop after each commit you want to modify
         // and change the message, add files, or do whatever you wish.
-ex:
-        Number	Hash	Commit Message	Author
-        1	2c6a45b	(HEAD) Adding public method to access protected method	Tom
-        2	ae45fab	Updates to database interface	Contractor 1
-        3	77b9b82	Improving database interface	Contractor 2
-        >git rebase --onto repair~3 repair~1 repair // remove commits 2 & 3 above
->git rebase --abort
->git rebase -i HEAD~
-
+        ex:
+                Number	Hash	Commit Message	Author
+                1	2c6a45b	(HEAD) Adding public method to access protected method	Tom
+                2	ae45fab	Updates to database interface	Contractor 1
+                3	77b9b82	Improving database interface	Contractor 2
+                $ git rebase --onto repair~3 repair~1 repair
+                        // remove commits 2 & 3 above & git rebase --abort
+$ git rebase -i HEAD~
 
 ******** REMOTE REPOSITORY
         https://help.github.com/articles/adding-an-existing-project-to-github-using-the-command-line/
