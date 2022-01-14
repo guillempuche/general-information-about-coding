@@ -245,6 +245,8 @@ DELETE/UNDO COMMITS
 
 $ git checkout <commit_SHA_hash> -- <file_name>
         // Revert specific file changes to a specific old commit.
+$ git checkout .
+        // This will revert all local uncommitted changes of your current branch.
 $ git commit --amend
         // when you commit too early and
         // possibly forget to add some files, or you mess
